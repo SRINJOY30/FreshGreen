@@ -1,6 +1,8 @@
 package com.example.FreshGreen.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.FreshGreen.model.FGcart;
 import com.example.FreshGreen.model.FGcontact;
 import com.example.FreshGreen.model.FGlogin;
 import com.example.FreshGreen.model.FGproduct;
@@ -72,10 +73,6 @@ public class FGcontroller {
         }
     }
 
-    @GetMapping("/cart")
-    public List<FGcart> viewCart() {
-        return cartService.getCartItems();
-    }
     @DeleteMapping("/cart")
     public String clearCart(@RequestParam Long cartId) {
         try {
@@ -84,6 +81,19 @@ public class FGcontroller {
         } catch (Exception e) {
             return "Failed to clear cart: " + e.getMessage();
         }
+    }
+    @GetMapping("/cart/details")
+    public Map<String, Object> getCartDetails() {
+        Map<String, Object> details = new HashMap<>();
+        details.put("items", cartService.getCartItems());
+        details.put("totalItems", cartService.getTotalItemCount());
+        details.put("grandTotal", cartService.getGrandTotalPrice());
+        return details;
+    }
+
+    @PostMapping("/product/restock")
+    public String restockProduct(@RequestParam Long productId, @RequestParam int amount) {
+        return cartService.restockProduct(productId, amount);
     }
 
     @PostMapping("/contact")

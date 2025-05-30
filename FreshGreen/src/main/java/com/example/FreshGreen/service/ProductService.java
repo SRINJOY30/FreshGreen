@@ -26,4 +26,6 @@ public class ProductService {
     public FGproduct getProductById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    
 }

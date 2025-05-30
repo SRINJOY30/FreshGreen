@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 public class FGproduct {
     @Id
     private Long productId;
+    
     private String productName;
     private String productDescription;
     private double productPrice;

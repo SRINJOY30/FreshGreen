@@ -17,6 +17,7 @@ import com.example.FreshGreen.model.FGlogin;
 import com.example.FreshGreen.model.FGproduct;
 import com.example.FreshGreen.service.CartService;
 import com.example.FreshGreen.service.ContactService;
+import com.example.FreshGreen.service.LoginService;
 import com.example.FreshGreen.service.ProductService;
 
 @RestController
@@ -32,17 +33,15 @@ public class FGcontroller {
     @Autowired
     private ContactService contactService;
 
+    @Autowired
+    private LoginService loginService;
+
+    @Autowired
+    private com.example.FreshGreen.repository.ProductRepository productRepository;
+
     @PostMapping("/login")
     public String login(@RequestBody FGlogin login) {
-        try {
-            if ("admin".equals(login.getUsername()) && "admin".equals(login.getPassword())) {
-                return "Login successful";
-            } else {
-                return "Invalid credentials";
-            }
-        } catch (Exception e) {
-            return "Login failed: " + e.getMessage();
-        }
+        return loginService.validateLogin(login) ? "Login successful" : "Invalid credentials";
     }
 
     @PostMapping("/products")
@@ -63,13 +62,11 @@ public class FGcontroller {
     @PostMapping("/cart")
     public String addToCart(@RequestParam Long productId, @RequestParam int quantity) {
         try {
-            FGproduct product = productService.getProductById(productId);
-            if (product != null) {
-                cartService.addToCart(product, quantity);
-                return "Added to cart";
-            } else {
+            FGproduct product = productRepository.findById(productId).orElse(null);
+            if (product == null) {
                 return "Product not found";
             }
+            return cartService.addToCart(product, quantity);
         } catch (Exception e) {
             return "Failed to add to cart: " + e.getMessage();
         }
@@ -79,11 +76,10 @@ public class FGcontroller {
     public List<FGcart> viewCart() {
         return cartService.getCartItems();
     }
-
-    @DeleteMapping("/cart/{id}")
-    public String clearCart(@RequestParam Long id) {
+    @DeleteMapping("/cart")
+    public String clearCart(@RequestParam Long cartId) {
         try {
-            cartService.clearCart(id);
+            cartService.clearCart(cartId);
             return "Cart cleared successfully";
         } catch (Exception e) {
             return "Failed to clear cart: " + e.getMessage();

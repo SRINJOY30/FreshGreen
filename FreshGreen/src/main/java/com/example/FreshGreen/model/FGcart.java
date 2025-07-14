@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class FGcart {
@@ -17,7 +17,7 @@ public class FGcart {
     private int count;
     private double productPrice;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "product_id")  // FK column
     private FGproduct product;
 

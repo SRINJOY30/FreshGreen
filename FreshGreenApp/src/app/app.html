@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Green App</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <header class="header">
+        <a routerLink="/home" routerLinkActive="active" class="logo">
+            <div class="banner-section">
+                <img src="banner.png" alt="Fresh Products" class="banner-img" />
+                <h1 class="brand">FreshGreen</h1>
+            </div>
+        </a>
+        
+        <nav class="navbar">
+            <a routerLink="/home" routerLinkActive="active">Home</a>
+            <a routerLink="/products" routerLinkActive="active">Products</a>
+            <a routerLink="/cart" routerLinkActive="active">Cart</a>
+            <a routerLink="/contact" routerLinkActive="active">Contact</a>
+            <a routerLink="/login" routerLinkActive="active">Login</a>
+        </nav>
+        
+    </header>  
+
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="footer">
+        <a routerLink="/about" routerLinkActive="active">About Us</a>
+        <a routerLink="/privacy" routerLinkActive="active">Privacy Policy</a>
+        <a routerLink="/terms" routerLinkActive="active">Terms of Service</a>
+        <p>&copy; 2025 Fresh Green App</p>
+    </footer>
+
+</body>
+</html>
+

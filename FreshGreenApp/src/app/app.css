@@ -1,0 +1,82 @@
+header{
+  background-color: #4CAF50;
+  color: rgb(241, 234, 7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: yellow;
+}
+header .banner-section {
+  display: flex;
+  align-items: center;
+}
+header .banner-section img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+header .banner-section h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: yellow;
+}
+
+.navbar a.active {
+  text-decoration: underline;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 200px;
+}
+.search-bar input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 500px;
+}
+.search-bar button {
+  padding: 10px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.search-bar button:hover {
+  background-color: #0d7f12;
+}
+
+.main-container {
+  padding: 20px;
+}
+
+footer {
+  background-color: #08b617;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+}
+footer a {
+  color: white;
+  font-weight: bold;
+  padding-right: 30px;
+  text-decoration: none;
+}

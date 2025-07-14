@@ -1,0 +1,15 @@
+.privacy-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+.privacy-container h2 {
+  color: #4CAF50;
+  text-align: center;
+}
+.privacy-container a {
+  color: #4CAF50;
+  text-decoration: none;
+}

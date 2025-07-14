@@ -1,0 +1,37 @@
+https://app.moqups.com/LdSBZJjsWt7CIIoszTNusSfzUeGIcPfF/view/page/ad64222d5
+
+/store/products:
+{
+    "productId":102,
+    "productName":"Onion",
+    "productDescription":"1kg pack",
+    "productPrice":30,
+    "productCategory":"Vegetables",
+    "productStock":15,
+    "productSupplier":"Grocery"
+}
+
+/store/login:
+{
+    "username":"admin",
+    "password":"admin"
+}
+
+/store/contact:
+{
+        "name": "Srinjoy",
+        "phone": "8335810224",
+        "email": "srinjoy@1234",
+        "subject": "Return",
+        "message": "no longer needed"
+    }
+
+/store/cart:
+{
+    ?productId=1&quantity=2
+}
+
+/store/product/restock:
+{
+	?productId=1&amount=10
+}

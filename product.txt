@@ -1,0 +1,69 @@
+HTML File:
+
+<div class="product-grid">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.productImage" alt="{{ product.productName }}" class="product-image">
+        <div class="product-details">
+          <h3>{{ product.productName }}</h3>
+          <p class="category">{{ product.productCategory }}</p>
+          <p>{{ product.productDescription }}</p>
+          <p class="price">₹{{ product.productPrice }}</p>
+          <p class="stock" [class.out-of-stock]="product.productStock === 0">
+            Stock: {{ product.productStock > 0 ? product.productStock : 'Out of stock' }}
+          </p>
+          <div class="quantity-selector">
+          <label>Quantity:</label>
+          <input type="number" [(ngModel)]="quantity" min="1" [max]="product.productStock" [disabled]="product.productStock === 0">
+        </div>
+
+        <button [disabled]="product.productStock === 0 || product.selectedQuantity > product.productStock"
+                (click)="addToCart(product)">
+          Add to Cart
+        </button>
+
+        <!-- Admin-only (or for testing, show always) -->
+        <button class="restock-btn" (click)="restockProduct(product)">
+          Restock
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="no-products" *ngIf="products.length === 0">
+    <p>No products available at the moment.</p>
+  </div>
+
+TS File:
+
+selectQuantity(product: any) {
+  if (!isNaN(this.quantity) && this.quantity > 0 && this.quantity <= product.productStock) {
+    product.selectedQuantity = this.quantity;
+  } else {
+    alert('Invalid quantity selected');
+  }
+}
+addToCart(product: any) {
+  if (product.selectedQuantity > product.productStock) {
+    alert('Not enough stock available!');
+    return;
+  }
+
+  // Call your backend API to add to cart here
+
+  product.productStock -= product.selectedQuantity;
+  alert(`${product.selectedQuantity} ${product.productName}(s) added to cart.`);
+  product.selectedQuantity = 1; // Reset
+}
+
+restockProduct(product: any) {
+  const amount = Number(prompt(`Enter stock to add for ${product.productName}:`));
+  if (!isNaN(amount) && amount > 0) {
+    product.productStock += amount;
+
+    // Call backend restock API here
+
+    alert(`${amount} items added back to stock for ${product.productName}`);
+  } else {
+    alert('Invalid amount');
+  }
+}
